@@ -2,13 +2,13 @@ export default function Navbar() {
     return (<>
     <nav className="w-full h-[10vh] flex justify-around items-center">
         <div>
-            <button className="">My Restaurant</button>
+            <a  href="http://localhost:3000/" className="">My Restaurant</a>
         </div>
         <div className="flex items-center justify-center">
-            <h1 className="text-4xl font-bold text-center">Drinky</h1>
+            <a href="http://localhost:3000/" className="text-4xl font-bold text-center">Drinky</a>
         </div>
         <div>
-            <button className="">Login/Register</button>
+            <a href="http://localhost:3000/login" className="">Login/Register</a>
         </div>
     </nav>
     </>)

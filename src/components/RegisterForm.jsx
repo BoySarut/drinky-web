@@ -1,5 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 function RegisterForm () {
 
@@ -9,7 +10,7 @@ function RegisterForm () {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [mobile, setMobile] = useState("")
 
-    
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -29,6 +30,10 @@ function RegisterForm () {
                 try {
                     const res = await axios.post('http://localhost:8000/register', userData,)
                     console.log(res)
+                    localStorage.setItem("token", res.data.token)
+                    localStorage.setItem("token", res.data.username)
+                    alert(`Register Successful Welcome ${res.data.username}`)
+                    navigate("/")
                 } catch (err) {
                     console.log(err)
                 }
@@ -68,9 +73,15 @@ function RegisterForm () {
             </div>
 
             <div>
-            <label htmlFor="mobile">Mobile</label>
-            <input className="w-full border-0 border-b-2 border-black py-1.2" type="text" placeholder="Input Mobile number" 
-            onChange={(e) => setMobile(e.target.value)} id="mobile" name="moblie" value={mobile}/>
+                <label htmlFor="mobile">Mobile</label>
+                <input 
+                    className="w-full border-0 border-b-2 border-black py-1.2" 
+                    type="text" 
+                    placeholder="Input Mobile number" 
+                    onChange={(e) => setMobile(e.target.value)} 
+                    id="mobile" 
+                    name="moblie" 
+                    value={mobile}/>
             </div>
 
             <button className="border p-4 rounded-2xl" type="submit">Apply Register</button>

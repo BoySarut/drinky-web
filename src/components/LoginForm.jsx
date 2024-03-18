@@ -1,7 +1,10 @@
 import { useState } from "react"
 import  axios  from "axios"
+import { useNavigate } from "react-router-dom"
 
 function LoginForm () {
+
+    const navigate = useNavigate()
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -25,6 +28,10 @@ function LoginForm () {
                 try {
                     const res = await axios.post('http://localhost:8000/login', userData,)
                     console.log(res)
+                    localStorage.setItem("token", res.data.token)
+                    localStorage.setItem("token", res.data.username)
+                    alert(`Login Successful Welcome ${res.data.username}`)
+                    navigate("/")
                 } catch (err) {
                     console.log(err)
                 }
@@ -49,7 +56,7 @@ function LoginForm () {
             </div>
 
             <button type="submit" className="border p-4 rounded-2xl">Login</button>
-            <button className="border p-4 rounded-2xl">Register</button>
+            <a href="http://localhost:3000/register" className="border p-4 rounded-2xl text-center">Register</a>
         </form>
     </div>
     </>)
